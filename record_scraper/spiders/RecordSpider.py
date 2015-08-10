@@ -16,6 +16,9 @@ class DiscogsSpider(scrapy.Spider):
             for link in response.xpath('//a[contains(@href, "/release/")]/@href'):
                 path = link.extract()
                 yield scrapy.http.Request('http://www.discogs.com' + path)
+            for link in response.xpath('//a[@class="pagination_next"]/@href'):
+                path = link.extract()
+                yield scrapy.http.Request('http://www.discogs.com' + path)
 
         item = RecordItem()
 
