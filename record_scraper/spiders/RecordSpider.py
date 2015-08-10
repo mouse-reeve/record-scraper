@@ -12,9 +12,21 @@ class DiscogsSpider(scrapy.Spider):
 
     def parse(self, response):
         ''' process links on collection page '''
-        import pdb;pdb.set_trace()
-        '''
-        for link in response.xpath('//a/@href'):
-            if re.match(r'*\/release\/\d*', link):
-                print link
-        '''
+        if 'tripofmice / Collection' in response.xpath('//title/text()').extract()[0]:
+            for link in response.xpath('//a[contains(@href, "/release/")]/@href'):
+                path = link.extract()
+                yield scrapy.http.Request('http://www.discogs.com' + path)
+
+        item = RecordItem()
+
+        try:
+            header = response.xpath('//meta[@property="og:title"]/@content').extract()[0]
+            item['artist'] = header.split(' - ')[0]
+            item['title'] = header.split(' - ')[1]
+            item['genre'] = response.xpath('//div[@itemprop="genre"]//a/text()').extract()[0]
+            item['style'] = response.xpath('//a[contains(@href, "/style")]/text()').extract()[0]
+        except IndexError:
+            pass
+
+        if item:
+            yield item
