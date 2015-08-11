@@ -4,12 +4,12 @@ Metadata about my [record collection](http://www.discogs.com/user/tripofmice/col
 
 Top artists:
 $( jq .[].artist items.json | sort | uniq -c | sort -r | head -3 | while read line; do
-    echo "-$line"
+    echo "- $line"
 done )
 
 Top styles:
 $( jq .[].style items.json | sort | uniq -c | sort -r | head -3 | while read line; do
-    echo "-$line"
+    echo "- $line"
 done )
 " > README.md
 
