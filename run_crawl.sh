@@ -1,4 +1,5 @@
-rm items.csv
+file="items.json"
+rm $file
 source bin/activate
-scrapy crawl discogs -o items.csv
+scrapy crawl discogs -o $file
 deactivate
