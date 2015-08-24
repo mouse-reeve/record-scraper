@@ -8,7 +8,7 @@ Top artists:
 - 2 "White Lung"
 
 Top styles:
-- 18 "Punk"
-- 5 "Indie Rock"
-- 4 "Alternative Rock"
+- 26 "Punk"
+- 15 "Indie Rock"
+- 5 "Alternative Rock"
 

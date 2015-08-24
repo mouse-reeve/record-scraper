@@ -8,7 +8,7 @@ $( jq .[].artist items.json | sort | uniq -c | sort -r | head -3 | while read li
 done )
 
 Top styles:
-$( jq .[].style items.json | sort | uniq -c | sort -r | head -3 | while read line; do
+$( jq '.[].style[]' items.json | sort | uniq -c | sort -r | head -3 | while read line; do
     echo "- $line"
 done )
 " > README.md
