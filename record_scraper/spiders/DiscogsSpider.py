@@ -26,8 +26,7 @@ class DiscogsSpider(scrapy.Spider):
             item['artist'] = header.split(' - ')[0]
             item['title'] = header.split(' - ')[1]
             item['genre'] = response.xpath('//div[@itemprop="genre"]//a/text()').extract()[0]
-            item['style'] = []
-            item['style'].extend(response.xpath('//a[contains(@href, "/style")]/text()').extract())
+            item['style'] = response.xpath('//a[contains(@href, "/style")]/text()').extract()
         except IndexError:
             pass
 
